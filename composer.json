@@ -1,0 +1,41 @@
+{
+    "name": "aoeng/laravel-tronscan",
+    "description": "tron apis for laravel",
+    "keywords": [
+        "tron",
+        "tronscan",
+        "trx",
+        "laravel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dang",
+            "email": "yofengge@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "iexbase/tron-api": "^3.1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aoeng\\LaravelTronscan\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aoeng\\LaravelTronscan\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aoeng\\LaravelTronscan\\Providers\\TronscanServiceProvider"
+            ],
+            "aliases": {
+                "Tronscan": "Aoeng\\LaravelTronscan\\Facades\\Tronscan"
+            }
+        }
+    }
+}
