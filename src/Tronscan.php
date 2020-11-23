@@ -5,9 +5,11 @@ namespace Aoeng\LaravelTronscan;
 
 
 use IEXBase\TronAPI\Provider\HttpProvider;
+use IEXBase\TronAPI\TransactionBuilder;
 use IEXBase\TronAPI\Tron;
+use IEXBase\TronAPI\TronManager;
 
-class Tronscan
+class Tronscan extends Tron
 {
 
     private $fullNode;
@@ -15,7 +17,6 @@ class Tronscan
     private $eventServer;
     private $signServer;
     private $explorer;
-    private $privateKey;
 
     public function __construct($fullNode = null,
                                 $solidityNode = null,
@@ -24,14 +25,24 @@ class Tronscan
                                 $explorer = null,
                                 $privateKey = null)
     {
+
         $this->fullNode = new HttpProvider($fullNode ?? config('tronscan.host.full'));
         $this->solidityNode = new HttpProvider($solidityNode ?? config('tronscan.host.full'));
         $this->eventServer = new HttpProvider($eventServer ?? config('tronscan.host.full'));
         $this->signServer = $signServer ? new HttpProvider($signServer) : null;
-        $this->explorer = $explorer ? new HttpProvider($explorer) : null;
-        $this->privateKey = $privateKey;
 
-        return new Tron($this->fullNode, $this->solidityNode, $this->eventServer, $this->signServer, $this->explorer, $this->privateKey);
+        if(!is_null($privateKey)) {
+            $this->setPrivateKey($privateKey);
+        }
+
+        $this->setManager(new TronManager($this, [
+            'fullNode'      =>    $this->fullNode,
+            'solidityNode'  =>   $this->solidityNode,
+            'eventServer'   =>   $this->eventServer,
+            'signServer'    =>   $this->signServer,
+        ]));
+
+        $this->transactionBuilder = new TransactionBuilder($this);
     }
 
 
