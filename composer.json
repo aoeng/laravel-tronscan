@@ -31,10 +31,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Aoeng\\LaravelTronscan\\Providers\\TronscanServiceProvider"
+                "Aoeng\\LaravelTronscan\\ServiceProvider"
             ],
             "aliases": {
-                "Tronscan": "Aoeng\\LaravelTronscan\\Facades\\Tronscan"
+                "Tronscan": "Aoeng\\LaravelTronscan\\Facade"
             }
         }
     }
