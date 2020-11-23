@@ -11,7 +11,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . './config.php' => config_path('tronscan.php'),
+            __DIR__ . '/config.php' => config_path('tronscan.php'),
         ], 'tronscan');
 
     }
