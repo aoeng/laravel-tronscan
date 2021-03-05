@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Aoeng\LaravelTronscan;
+namespace Aoeng\Laravel\Tronscan;
 
 
 use IEXBase\TronAPI\Exception\TronException;
@@ -27,14 +27,12 @@ class Tronscan extends Tron
                                 $privateKey = null)
     {
 
-        $this->fullNode = new HttpProvider($fullNode ?? config('tronscan.host.full'));
-        $this->solidityNode = new HttpProvider($solidityNode ?? config('tronscan.host.full'));
-        $this->eventServer = new HttpProvider($eventServer ?? config('tronscan.host.full'));
-        $this->signServer = $signServer ? new HttpProvider($signServer) : null;
-
-        if (!is_null($privateKey)) {
-            $this->setPrivateKey($privateKey);
-        }
+        $this->full($fullNode ?? config('tronscan.host.full'));
+        $this->solidity($solidityNode ?? config('tronscan.host.solidity'));
+        $this->event($eventServer ?? config('tronscan.host.event'));
+        $explorer && $this->explorer($explorer);
+        $signServer && $this->sign($signServer);
+        $privateKey && $this->setPrivateKey($privateKey);
 
         $this->setManager(new TronManager($this, [
             'fullNode'     => $this->fullNode,
@@ -47,7 +45,7 @@ class Tronscan extends Tron
     }
 
 
-    public function full(string $fullNode)
+    public function full(string $fullNode): Tronscan
     {
         $this->fullNode = new HttpProvider($fullNode);
 
@@ -96,12 +94,12 @@ class Tronscan extends Tron
         }
         $abi = [
             [
-                'name'   => 'transfer',
-                'inputs' => [
+                'name'    => 'transfer',
+                'inputs'  => [
                     ['name' => '_to', 'type' => 'address'],
                     ['name' => '_value', 'type' => 'uint256'],
                 ],
-                'outputs'=>[
+                'outputs' => [
                     ['name' => '_to', 'type' => 'bool'],
                 ]
 

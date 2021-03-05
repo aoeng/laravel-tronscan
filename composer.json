@@ -20,21 +20,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Aoeng\\LaravelTronscan\\": "src/"
+            "Aoeng\\Laravel\\Tronscan\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Aoeng\\LaravelTronscan\\": "tests/"
+            "Aoeng\\Laravel\\Tronscan\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Aoeng\\LaravelTronscan\\ServiceProvider"
+                "Aoeng\\Laravel\\Tronscan\\ServiceProvider"
             ],
             "aliases": {
-                "Tronscan": "Aoeng\\LaravelTronscan\\Facade"
+                "Tran": "Aoeng\\Laravel\\Tronscan\\Facades\\Tron"
             }
         }
     }
