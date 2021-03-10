@@ -87,7 +87,8 @@ class Tronscan extends Tron
         return $this;
     }
 
-    public function sendTRC20TokenTransaction(string $to, float $amount, $tokenID = null, string $from = null)
+
+    public function sendTRC20TokenTransaction(string $to, float $amount, $tokenID = null, $from = null)
     {
         if (is_null($from)) {
             $from = $this->address['hex'];
