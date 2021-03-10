@@ -10,8 +10,8 @@ return [
     ],
     'wallet' => [
         'address'     => env('TRONSCAN_WALLET_ADDRESS', ''),
-        'private_key' => env('TRONSCAN_WALLET_PRIVATE_KEY', '')
-
+        'private_key' => env('TRONSCAN_WALLET_PRIVATE_KEY', ''),
+        'free_limit'  => env('TRONSCAN_WALLET_FREE_LIMIT', 1000000)
     ]
 
 ];

@@ -112,7 +112,7 @@ class Tronscan extends Tron
             '1' => $this->toTron($amount),
         ];
         $address = $this->address2HexString($from);
-        $transaction = $this->transactionBuilder->triggerSmartContract($abi, $contract, 'transfer', $params, 1000000, $address);
+        $transaction = $this->transactionBuilder->triggerSmartContract($abi, $contract, 'transfer', $params, config('tronscan.wallet.free_limit'), $address);
         $signedTransaction = $this->signTransaction($transaction);
 
         $response = $this->sendRawTransaction($signedTransaction);
