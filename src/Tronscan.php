@@ -47,38 +47,47 @@ class Tronscan extends Tron
 
     public function full(string $fullNode): Tronscan
     {
-        $this->fullNode = new HttpProvider($fullNode);
+        $this->fullNode = $this->httpClient($fullNode);
 
         return $this;
     }
 
     public function solidity(string $solidityNode)
     {
-        $this->solidityNode = new HttpProvider($solidityNode);
+        $this->solidityNode = $this->httpClient($solidityNode);
 
         return $this;
     }
 
     public function event(string $eventServer)
     {
-        $this->eventServer = new HttpProvider($eventServer);
+        $this->eventServer = $this->httpClient($eventServer);
 
         return $this;
     }
 
     public function sign(string $signServer)
     {
-        $this->signServer = new HttpProvider($signServer);
+        $this->signServer = $this->httpClient($signServer);
 
         return $this;
     }
 
     public function explorer(string $explorer)
     {
-        $this->explorer = new HttpProvider($explorer);
+        $this->explorer = $this->httpClient($explorer);
 
         return $this;
     }
+
+    public function httpClient(string $host)
+    {
+        return new HttpProvider($host, 30000, false, false, [
+            'Content-Type'     => 'application/json',
+            'TRON-PRO-API-KEY' => config('tronscan.key')
+        ]);
+    }
+
 
     public function key(string $privateKey)
     {

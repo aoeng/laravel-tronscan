@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'key'    => env('TRONSCAN_API_KEY', ''),
     'host'   => [
         'full'     => env('TRONSCAN_HOST_FULL', 'https://api.trongrid.io'),
         'solidity' => env('TRONSCAN_HOST_SOLIDITY', 'https://api.trongrid.io'),
