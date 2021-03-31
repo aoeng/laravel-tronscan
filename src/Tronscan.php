@@ -4,8 +4,8 @@
 namespace Aoeng\Laravel\Tronscan;
 
 
+use Aoeng\Laravel\Tronscan\Provider\HttpProvider;
 use IEXBase\TronAPI\Exception\TronException;
-use IEXBase\TronAPI\Provider\HttpProvider;
 use IEXBase\TronAPI\TransactionBuilder;
 use IEXBase\TronAPI\Tron;
 use IEXBase\TronAPI\TronManager;
