@@ -150,12 +150,6 @@ class HttpProvider implements HttpProviderInterface
             throw new TronException('The method is not defined');
         }
 
-        $time = time();
-        Cache::forget('tron_api_limit:' . ($time - 1));
-        if (!empty(config('tronscan.key')) && Cache::increment('tron_api_limit:' . $time) > 15) {
-            throw new TronException('The api access limit reached');
-        }
-
         $options = [
             'headers' => $this->headers,
             'body'    => json_encode($payload)
