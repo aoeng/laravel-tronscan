@@ -129,4 +129,29 @@ class Tronscan extends Tron
         return array_merge($response, $signedTransaction);
     }
 
+
+    public function getContractBalance(string $address, $tokenID)
+    {
+        $abi = [
+            [
+                'name'    => 'balanceOf',
+                'inputs'  => [
+                    ['name' => 'address', 'type' => 'address'],
+                ],
+                'outputs' => [
+                    ['name' => 'balance', 'type' => 'uint256'],
+                ]
+            ]
+        ];
+        $address = $this->address2HexString($address);
+        $contract = $this->toHex($tokenID);
+        $params = [
+            '0' => $address,
+        ];
+
+
+        $transaction = $this->transactionBuilder->triggerConstantContract($abi, $contract, 'balanceOf', $params, $address);
+
+        return $transaction['balance']->toString();
+    }
 }

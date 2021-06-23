@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Facade as LaravelFacade;
  * @method static mixed toHex(string $address)
  * @method static mixed generateAddress()
  * @method static mixed getBalance(string $address = null, bool $fromTron = false)
+ * @method static mixed getContractBalance(string $address, string $tokenID)
  * @method static mixed getAccount(string $address = null)
  * @method static mixed getAddress()
  * @method static mixed getTransactionCount()
